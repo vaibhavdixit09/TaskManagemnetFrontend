@@ -1,0 +1,27 @@
+/* index.css or tailwind.css */
+.react-calendar {
+  border: none;
+  background-color: #2d2d2d; /* Tailwind: bg-gray-800 */
+}
+
+.react-calendar__month-view__days__day {
+  color: #ffffff; /* Tailwind: text-white */
+}
+
+.react-calendar__month-view__weekdays {
+  color: #b3b3b3; /* Tailwind: text-gray-400 */
+}
+
+.react-calendar__tile {
+  background: #2d2d2d; /* Tailwind: bg-gray-800 */
+  border-radius: 0.25rem; /* Tailwind: rounded-md */
+}
+
+.react-calendar__tile--active {
+  background: #4a4a4a; /* Tailwind: bg-gray-700 */
+  border: 1px solid #6b6b6b; /* Tailwind: border-gray-600 */
+}
+
+.react-calendar__tile--now {
+  border: 2px solid #ffffff; /* Tailwind: border-white */
+}
