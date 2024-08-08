@@ -5,11 +5,11 @@ import { format, parseISO, isValid } from "date-fns";
 import ShowTaskModal from "./ShowTaskModal";
 import UpdateTaskModal from "./UpdateTaskModal";
 import { toast } from "react-toastify";
+import UseDropdown from "./UseDropdown";
 
 const ManageTask = () => {
-  const filterDropdownRef = useRef(null);
-  const actionDropdownRefs = useRef([]);
-
+  const dropdown1 = UseDropdown();
+  const dropdown2 = UseDropdown();
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 8;
   const indexOfLastTask = currentPage * tasksPerPage;
@@ -40,7 +40,7 @@ const ManageTask = () => {
       setFilteredTasks(filtered);
     }
 
-    // Optionally update tasks displayed based on search query
+    //  update tasks displayed based on search query
     setTasks(filteredTasks);
   };
 
@@ -60,6 +60,7 @@ const ManageTask = () => {
     try {
       console.log("update function started", updatedTask);
       const response = await fetch(
+        // `https://taskmanagementbackend-aen8.onrender.com/api/v1/update-task/${_id}`,
         `http://localhost:4000/api/v1/update-task/${_id}`,
         {
           method: "PUT",
@@ -94,6 +95,7 @@ const ManageTask = () => {
     try {
       const user = JSON.parse(localStorage.getItem("userData"));
       const response = await fetch(
+        // `https://taskmanagementbackend-aen8.onrender.com/api/v1/list-task/${user._id}`
         `http://localhost:4000/api/v1/list-task/${user._id}`
       );
       const data = await response.json();
@@ -120,6 +122,7 @@ const ManageTask = () => {
       try {
         // Call the delete API
         const response = await fetch(
+          // `https://taskmanagementbackend-aen8.onrender.com/api/v1/delete-task/${taskId}`,
           `http://localhost:4000/api/v1/delete-task/${taskId}`,
           {
             method: "DELETE",
@@ -170,28 +173,6 @@ const ManageTask = () => {
         return "";
     }
   };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        filterDropdownRef.current &&
-        !filterDropdownRef.current.contains(event.target)
-      ) {
-        setIsFilterDropdownOpen(false);
-      }
-      if (
-        actionDropdownRefs.current &&
-        actionDropdownRefs.current.every(
-          (ref) => ref && !ref.contains(event.target)
-        )
-      ) {
-        setIsActionDropdownOpen(null);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
@@ -304,7 +285,7 @@ const ManageTask = () => {
               <div className="flex items-center space-x-3 w-full md:w-auto">
                 <button
                   id="filterDropdownButton"
-                  onClick={toggleFilterDropdown}
+                  onClick={dropdown1.toggleDropdown}
                   className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                   type="button"
                 >
@@ -336,69 +317,71 @@ const ManageTask = () => {
                     />
                   </svg>
                 </button>
-                <div
-                  id="filterDropdown"
-                  className={`absolute right-0 top-16 z-10 w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700 ${
-                    isFilterDropdownOpen ? "block" : "hidden"
+                {dropdown1.isDropdownOpen && (
+                  <div
+                    ref={dropdown1.dropdownRef}
+                    id="filterDropdown"
+                    className={`absolute right-0 top-16 z-10 w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700 "
                   }`}
-                >
-                  <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                    Filter Tasks
-                  </h6>
-                  <ul
-                    className="space-y-2 text-sm"
-                    aria-labelledby="filterDropdownButton"
                   >
-                    <li className="flex items-center">
-                      <button
-                        onClick={() => applyFilter("All")}
-                        className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                      >
-                        All
-                      </button>
-                    </li>
-                    <li className="flex items-center">
-                      <button
-                        onClick={() => applyFilter("Office")}
-                        className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                      >
-                        Office Task
-                      </button>
-                    </li>
-                    <li className="flex items-center">
-                      <button
-                        onClick={() => applyFilter("Personal")}
-                        className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                      >
-                        Personal Task
-                      </button>
-                    </li>
-                    <li className="flex items-center">
-                      <button
-                        onClick={() => applyFilter("dueToday")}
-                        className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                      >
-                        Due Today
-                      </button>
-                    </li>
-                    <li className="flex items-center">
-                      <button
-                        onClick={() => applyFilter("high-priority")}
-                        className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                      >
-                        High Priority
-                      </button>
-                    </li>
-                    <li className="flex items-center">
-                      <button
-                        onClick={() => applyFilter("low-priority")}
-                        className="text-sm font-medium text-gray-900 dark:text-gray-100"
-                      >
-                        Low Priority
-                      </button>
-                    </li>
-                  </ul>
-                </div>
+                    <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                      Filter Tasks
+                    </h6>
+                    <ul
+                      className="space-y-2 text-sm"
+                      aria-labelledby="filterDropdownButton"
+                    >
+                      <li className="flex items-center">
+                        <button
+                          onClick={() => applyFilter("All")}
+                          className="text-sm font-medium text-gray-900 dark:text-gray-100"
+                        >
+                          All
+                        </button>
+                      </li>
+                      <li className="flex items-center">
+                        <button
+                          onClick={() => applyFilter("Office")}
+                          className="text-sm font-medium text-gray-900 dark:text-gray-100"
+                        >
+                          Office Task
+                        </button>
+                      </li>
+                      <li className="flex items-center">
+                        <button
+                          onClick={() => applyFilter("Personal")}
+                          className="text-sm font-medium text-gray-900 dark:text-gray-100"
+                        >
+                          Personal Task
+                        </button>
+                      </li>
+                      <li className="flex items-center">
+                        <button
+                          onClick={() => applyFilter("dueToday")}
+                          className="text-sm font-medium text-gray-900 dark:text-gray-100"
+                        >
+                          Due Today
+                        </button>
+                      </li>
+                      <li className="flex items-center">
+                        <button
+                          onClick={() => applyFilter("high-priority")}
+                          className="text-sm font-medium text-gray-900 dark:text-gray-100"
+                        >
+                          High Priority
+                        </button>
+                      </li>
+                      <li className="flex items-center">
+                        <button
+                          onClick={() => applyFilter("low-priority")}
+                          className="text-sm font-medium text-gray-900 dark:text-gray-100"
+                        >
+                          Low Priority
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
 
               {/* filter ends */}
@@ -428,6 +411,17 @@ const ManageTask = () => {
                 </tr>
               </thead>
               <tbody>
+                {currentTasks.length === 0 && (
+                  <tr className="border-b dark:border-gray-700">
+                    <th
+                      scope="row"
+                      colSpan="5"
+                      className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap text-center dark:text-white"
+                    >
+                      Oops!! No tasks found...😢
+                    </th>
+                  </tr>
+                )}
                 {currentTasks.map((task, index) => (
                   <tr key={task._id} className="border-b dark:border-gray-700">
                     <th
@@ -449,9 +443,8 @@ const ManageTask = () => {
                     <td className="px-4 py-3">{formatDate(task.dueDate)}</td>
                     <td className="px-4 py-3 flex items-center justify-end relative">
                       <button
-                        id={`dropdown-button-${index}`}
-                        onClick={() => toggleDropdown(index)}
-                        className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
+                        onClick={() => openModal(task)}
+                        className="inline-flex items-center p-0.5 text-sm font-medium text-center teblue-500 hover:text-blue-800 rounded-lg focus:outline-none dark:text-blue-400 dark:hover:text-blue-100"
                         type="button"
                       >
                         <svg
@@ -464,42 +457,36 @@ const ManageTask = () => {
                           <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
                         </svg>
                       </button>
-                      <div
-                        id={`dropdown-${index}`}
-                        className={`absolute top-10 z-50 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ${
-                          openDropdownIndex === index ? "" : "hidden"
-                        }`}
+                      <button
+                        onClick={() => openEditModal(task)}
+                        className="inline-flex items-center p-0.5 text-sm font-medium text-center teyellow-500 hover:text-yellow-800 rounded-lg focus:outline-none dark:text-yellow-400 dark:hover:text-yellow-100 ml-2"
+                        type="button"
                       >
-                        <ul
-                          className="py-1 text-sm text-gray-700 dark:text-gray-200"
-                          aria-labelledby={`dropdown-button-${index}`}
+                        <svg
+                          className="w-5 h-5"
+                          aria-hidden="true"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <li>
-                            <p
-                              onClick={() => openModal(task)}
-                              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                              Show
-                            </p>
-                          </li>
-                          <li>
-                            <p
-                              onClick={() => openEditModal(task)}
-                              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                              Edit
-                            </p>
-                          </li>
-                        </ul>
-                        <div className="py-1">
-                          <p
-                            onClick={() => handleDeleteTask(task._id)}
-                            className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          >
-                            Delete
-                          </p>
-                        </div>
-                      </div>
+                          <path d="M17.25 5.75l-2.5-2.5a1.75 1.75 0 00-2.5 0l-8 8a1.75 1.75 0 00-.41.7l-1 4a1.75 1.75 0 002.13 2.13l4-1a1.75 1.75 0 00.7-.41l8-8a1.75 1.75 0 000-2.5zM5.94 13.44l1.12-1.12 1.12 1.12-1.12 1.12-1.12-1.12zm5-5l1.12-1.12 1.12 1.12-1.12 1.12-1.12-1.12zm-3.78 8.34l-1.88.47.47-1.88 1.41-1.41 1.12 1.12-1.41 1.41zm7.09-7.09l-8 8-.94-.94 8-8 .94.94z" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => handleDeleteTask(task._id)}
+                        className="inline-flex items-center p-0.5 text-sm font-medium text-center text-red-500 hover:text-red-800 rounded-lg focus:outline-none dark:text-red-400 dark:hover:text-red-100 ml-2"
+                        type="button"
+                      >
+                        <svg
+                          className="w-5 h-5"
+                          aria-hidden="true"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M6 2a2 2 0 00-2 2v1H2.5a.5.5 0 000 1H3v11a2 2 0 002 2h10a2 2 0 002-2V6h.5a.5.5 0 000-1H16V4a2 2 0 00-2-2H6zm0 2h8v1H6V4zm1 3v10h1V7H7zm2 0v10h1V7H9zm2 0v10h1V7h-1zm2 0v10h1V7h-1z" />
+                        </svg>
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -521,7 +508,7 @@ const ManageTask = () => {
             <button
               onClick={handlePreviousPage}
               disabled={currentPage === 1}
-              className="bg-purple-500 p-2 text-white rounded disabled:opacity-50"
+              className="bg-purple-500 px-2  font-thin text-white rounded disabled:opacity-50"
             >
               Previous
             </button>
@@ -546,7 +533,7 @@ const ManageTask = () => {
             <button
               onClick={handleNextPage}
               disabled={currentPage === Math.ceil(tasks.length / tasksPerPage)}
-              className="bg-purple-500 text-white p-2 rounded disabled:opacity-50"
+              className="bg-purple-500 text-white font-thin px-2 rounded disabled:opacity-50"
             >
               Next
             </button>

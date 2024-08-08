@@ -17,13 +17,13 @@ export const DashboardProvider = ({ children }) => {
     const token = localStorage.getItem("jwtToken");
 
     if (!token) {
-      toast.error("No token found. Please log in.");
+      toast.info("Please log in...");
       return;
     }
 
     try {
       const userResponse = await fetch(
-        "http://localhost:4000/api/v1/user-details",
+        "https://taskmanagementbackend-aen8.onrender.com/api/v1/user-details",
         {
           method: "GET",
           headers: {

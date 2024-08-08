@@ -1,28 +1,83 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DoughnutChart from "../../charts/DoughnutChart";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Import utilities
 import { tailwindConfig } from "../../utils/Utils";
 
 function DashboardCard06() {
-  const chartData = {
-    labels: ["Personal", "Office"],
-    datasets: [
-      {
-        label: "Task Categories",
-        data: [41, 59],
-        backgroundColor: [
-          tailwindConfig().theme.colors.purple[500],
-          tailwindConfig().theme.colors.purple[800],
+  const [chartData, setChartData] = useState(null);
+
+  const fetchTasks = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("userData"));
+      if (!user || !user._id) {
+        toast.error("User data not found");
+        return;
+      }
+
+      const response = await fetch(
+        `http://localhost:4000/api/v1/list-task/${user._id}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      console.log("data", data);
+
+      const personalTasks = data.allTasks.filter((task) =>
+        task.category.includes("Personal")
+      );
+      const officeTasks = data.allTasks.filter((task) =>
+        task.category.includes("Office")
+      );
+
+      const totalTasks = personalTasks.length + officeTasks.length;
+
+      let personalPercentage = 0;
+      let officePercentage = 0;
+
+      if (totalTasks > 0) {
+        personalPercentage = Math.round(
+          (personalTasks.length / totalTasks) * 100
+        );
+        officePercentage = 100 - personalPercentage; // Ensure that percentages add up to 100
+      }
+
+      setChartData({
+        labels: ["Personal", "Office"],
+        datasets: [
+          {
+            label: "Task Categories",
+            data: [personalPercentage, officePercentage],
+            backgroundColor: [
+              tailwindConfig().theme.colors.purple[500],
+              tailwindConfig().theme.colors.purple[800],
+            ],
+            hoverBackgroundColor: [
+              tailwindConfig().theme.colors.purple[600],
+              tailwindConfig().theme.colors.purple[900],
+            ],
+            borderWidth: 0,
+          },
         ],
-        hoverBackgroundColor: [
-          tailwindConfig().theme.colors.purple[600],
-          tailwindConfig().theme.colors.purple[900],
-        ],
-        borderWidth: 0,
-      },
-    ],
+      });
+
+      if (data.allTasks.length <= 0) {
+        toast.warning("No tasks found");
+      }
+    } catch (error) {
+      toast.error("An error occurred while fetching tasks");
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
 
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-sm rounded-xl">
@@ -31,9 +86,7 @@ function DashboardCard06() {
           Task Categories
         </h2>
       </header>
-      {/* Chart built with Chart.js 3 */}
-      {/* Change the height attribute to adjust the chart height */}
-      <DoughnutChart data={chartData} width={389} height={260} />
+      {chartData && <DoughnutChart data={chartData} width={389} height={260} />}
     </div>
   );
 }

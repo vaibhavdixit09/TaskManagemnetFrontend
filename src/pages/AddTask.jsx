@@ -31,13 +31,17 @@ const AddTask = () => {
       const finalFormData = { ...formData, owner: user._id };
 
       // Send a POST request to create a new task using Fetch API
-      const response = await fetch("http://localhost:4000/api/v1/create-task", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(finalFormData),
-      });
+      const response = await fetch(
+        // "https://taskmanagementbackend-aen8.onrender.com/api/v1/create-task",
+        "http://localhost:4000/api/v1/create-task",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(finalFormData),
+        }
+      );
 
       if (response.ok) {
         setMessage("Task created successfully");

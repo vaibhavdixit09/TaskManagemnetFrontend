@@ -20,13 +20,17 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:4000/api/v1/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        // "https://taskmanagementbackend-aen8.onrender.com/api/v1/login",
+        "http://localhost:4000/api/v1/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -34,6 +38,7 @@ const Login = () => {
 
         // Fetch user data
         const userResponse = await fetch(
+          // "https://taskmanagementbackend-aen8.onrender.com/api/v1/user-details",
           "http://localhost:4000/api/v1/user-details",
           {
             method: "GET",
@@ -59,7 +64,7 @@ const Login = () => {
       } else {
         // Handle non-OK response for login
         const errorData = await response.text();
-        toast.error(errorData || "Login failed");
+        // toast.error(errorData || "Login failed");
         setError(errorData || "Login failed");
       }
     } catch (error) {

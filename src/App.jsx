@@ -13,8 +13,8 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   const location = useLocation();
+  localStorage.setItem("theme", "dark");
   useEffect(() => {
-    localStorage.setItem("theme", "dark");
     document.querySelector("html").style.scrollBehavior = "auto";
     window.scroll({ top: 0 });
     document.querySelector("html").style.scrollBehavior = "";

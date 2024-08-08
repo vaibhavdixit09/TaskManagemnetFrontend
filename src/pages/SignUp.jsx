@@ -47,20 +47,24 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/api/v1/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstname: formData.firstname,
-          lastname: formData.lastname,
-          email: formData.email,
-          password: formData.password,
-          phone: formData.phone || "", // Optional
-          address: formData.address || "", // Optional
-        }),
-      });
+      const response = await fetch(
+        // "https://taskmanagementbackend-aen8.onrender.com/api/v1/signup",
+        "http://localhost:4000/api/v1/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstname: formData.firstname,
+            lastname: formData.lastname,
+            email: formData.email,
+            password: formData.password,
+            phone: formData.phone || "", // Optional
+            address: formData.address || "", // Optional
+          }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
