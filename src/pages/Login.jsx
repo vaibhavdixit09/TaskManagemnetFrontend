@@ -13,9 +13,28 @@ const Login = () => {
   const navigate = useNavigate();
   const { user, setUser } = useDashboard();
 
-  useEffect(() => {
-    localStorage.setItem("theme", "dark");
-  }, []);
+  // Example function to handle Google login
+  async function handleGoogleLogin() {
+    // try {
+    //   const response = await fetch(
+    //     "http://localhost:5000/auth/google/callback"
+    //   ); // Adjust URL as needed
+    //   const data = await response.json();
+    //   if (data.token) {
+    //     localStorage.setItem("authToken", data.token);
+    //     localStorage.setItem("authToken", data.user);
+    //     navigate("/dashboard/home"); // Or update state without redirect
+    //     toast.success("logged in...");
+    //   } else {
+    //     toast.error("Authentication failed");
+    //     console.error("Authentication failed");
+    //   }
+    // } catch (error) {
+    //   console.error("Error:", error);
+    // }
+    console.log("g hit");
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -167,6 +186,15 @@ const Login = () => {
                     Login
                   </span>
                 </button>
+                <Link
+                  onClick={handleGoogleLogin}
+                  className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-blue-600 to-blue-500 group-hover:from-blue-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none dark:focus:ring-blue-800"
+                  to="http://localhost:4000/auth/google"
+                >
+                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 text-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    Login with Google
+                  </span>
+                </Link>
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-400">
                   Don't have an account?
                   <Link className="text-blue-600 px-2" to="/signup">

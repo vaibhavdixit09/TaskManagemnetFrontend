@@ -15,7 +15,8 @@ export const DashboardProvider = ({ children }) => {
   // Function to fetch user data
   const fetchUserData = async () => {
     const token = localStorage.getItem("jwtToken");
-
+    const userData = localStorage.getItem("userData");
+    console.log(token, userData);
     if (!token) {
       toast.info("Please log in...");
       return;
@@ -23,7 +24,8 @@ export const DashboardProvider = ({ children }) => {
 
     try {
       const userResponse = await fetch(
-        "https://taskmanagementbackend-aen8.onrender.com/api/v1/user-details",
+        // "https://taskmanagementbackend-aen8.onrender.com/api/v1/user-details",
+        "http://localhost:4000/api/v1/user-details",
         {
           method: "GET",
           headers: {
@@ -39,7 +41,7 @@ export const DashboardProvider = ({ children }) => {
       } else {
         // Handle non-OK response for user data
         const userError = await userResponse.text();
-        toast.error(userError || "Failed to fetch user data");
+        // toast.error(userError || "Failed to fetch user data");
       }
     } catch (error) {
       toast.error("An error occurred while fetching user data");

@@ -14,7 +14,10 @@ import DashboardCard10 from "../partials/dashboard/DashboardCard10";
 import DashboardCard11 from "../partials/dashboard/DashboardCard11";
 import DashboardCard12 from "../partials/dashboard/DashboardCard12";
 import DashboardCard13 from "../partials/dashboard/DashboardCard13";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  // const location = useLocation();
+
   return (
     <div>
       <main className="grow overflow-auto max-h-screen">
