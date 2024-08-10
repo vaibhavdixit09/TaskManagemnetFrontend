@@ -67,10 +67,10 @@ const Calendar = () => {
   };
 
   return (
-    <section className="bg-gray-900 flex items-center justify-center h-screen">
-      <div className="lg:w-12/12 md:w-9/12 sm:w-10/12 h-screen mt-4 mx-auto ">
-        <div className="bg-gray-800 shadow-lg rounded-lg overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-3 bg-gray-700 text-white">
+    <section className="bg-gray-900 ">
+      <div className=" mx-auto  w-[100%]   ">
+        <div className="bg-gray-900 shadow-lg  overflow-hidden h-[90vh]">
+          <div className="flex items-center justify-between px-6 py-3 bg-gray-800 text-white">
             <button onClick={handlePrevMonth} className="focus:outline-none">
               Previous
             </button>
@@ -84,7 +84,7 @@ const Calendar = () => {
               Next
             </button>
           </div>
-          <div className="grid grid-cols-7 gap-2 p-4">
+          <div className="grid grid-cols-7 gap-5 p-12  ">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
               (day, index) => (
                 <div key={index} className="text-center font-semibold">

@@ -21,7 +21,7 @@ import { jwtDecode } from "jwt-decode";
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { activeSection } = useDashboard();
-  const { user, setUser } = useDashboard();
+  const { user, setUser, fetchUserData } = useDashboard();
 
   const location = useLocation();
 
@@ -32,21 +32,21 @@ function Dashboard() {
     // console.log("location.search", location.search);
     const isSocialLogin = searchParams.get("Is_socialLogin");
     if (token) {
-      console.log(token);
-      console.log("INI");
-      // Decode the token to get user data
-      const userData = jwtDecode(token);
+      console.log("tokendash", token);
 
-      // Store user data in local storage or state
+      const userData = jwtDecode(token);
       localStorage.setItem("jwtToken", token);
       localStorage.setItem("userData", JSON.stringify(userData));
       setUser(userData);
+      console.log("initiated called");
+      fetchUserData();
+      console.log("called");
     }
   }, [location.search]);
 
   return (
     <section>
-      {user && (
+      {localStorage.getItem("jwtToken") && (
         <div className="flex min-h-screen">
           {/* Sidebar */}
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />

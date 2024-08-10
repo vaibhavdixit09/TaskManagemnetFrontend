@@ -77,9 +77,9 @@ const Home = () => {
             {/* Card (Reasons for Refunds) */}
             {/* <DashboardCard11 /> */}
             {/* Card (Recent Activity) */}
-            <DashboardCard12 />
+            {/* <DashboardCard12 /> */}
             {/* Card (Income/Expenses) */}
-            <DashboardCard13 />
+            {/* <DashboardCard13 /> */}
           </div>
         </div>
       </main>

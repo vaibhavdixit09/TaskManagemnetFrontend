@@ -15,8 +15,8 @@ export const DashboardProvider = ({ children }) => {
   // Function to fetch user data
   const fetchUserData = async () => {
     const token = localStorage.getItem("jwtToken");
-    const userData = localStorage.getItem("userData");
-    console.log(token, userData);
+    // const userData = localStorage.getItem("userData");
+    console.log("token", token);
     if (!token) {
       toast.info("Please log in...");
       return;
@@ -34,20 +34,20 @@ export const DashboardProvider = ({ children }) => {
           },
         }
       );
-
+      console.log(userResponse);
       if (userResponse.ok) {
         const userData = await userResponse.json();
         setUser(userData);
+        localStorage.setItem("userData", JSON.stringify(userData));
       } else {
         // Handle non-OK response for user data
         const userError = await userResponse.text();
         // toast.error(userError || "Failed to fetch user data");
       }
     } catch (error) {
-      toast.error("An error occurred while fetching user data");
+      // toast.error("An error occurred while fetching user data");
     }
   };
-
   // Fetch user data on component mount if token is present
   useEffect(() => {
     fetchUserData();

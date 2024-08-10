@@ -157,7 +157,6 @@ const Login = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="mt-1 p-2 outline-none w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
-                  required
                 />
               </div>
               <div className="col-span-12">
@@ -174,13 +173,13 @@ const Login = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="mt-1 p-2 outline-none w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
-                  required
                 />
               </div>
-              <div className="col-span-7 sm:flex sm:items-center sm:gap-4">
+
+              <div className="col-span-7 block sm:flex sm:items-center sm:gap-4 gap-2 ">
                 <button
                   type="submit"
-                  className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none dark:focus:ring-blue-800"
+                  className="relative mr-2 inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none dark:focus:ring-blue-800"
                 >
                   <span className="relative px-5 py-2.5 transition-all ease-in duration-75 text-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                     Login
@@ -188,21 +187,25 @@ const Login = () => {
                 </button>
                 <Link
                   onClick={handleGoogleLogin}
-                  className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-blue-600 to-blue-500 group-hover:from-blue-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none dark:focus:ring-blue-800"
                   to="http://localhost:4000/auth/google"
                 >
-                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 text-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                    Login with Google
-                  </span>
+                  <button
+                    type="button"
+                    className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white focus:ring-4 focus:outline-none dark:focus:ring-blue-800"
+                  >
+                    <span className="relative px-5 py-2.5 transition-all ease-in duration-75 text-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                      Google Login
+                    </span>
+                  </button>
                 </Link>
-                <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-400">
-                  Don't have an account?
-                  <Link className="text-blue-600 px-2" to="/signup">
-                    Sign Up
-                  </Link>
-                </p>
               </div>
             </form>
+            <p className="mt-4 pt-7 text-sm text-gray-500 sm:mt-0 dark:text-gray-400">
+              Don't have an account?
+              <Link className="text-blue-600 px-2" to="/signup">
+                Sign Up
+              </Link>
+            </p>
           </div>
         </main>
       </div>

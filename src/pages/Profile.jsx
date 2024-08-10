@@ -7,6 +7,7 @@ const Profile = () => {
   const user = JSON.parse(localStorage.getItem("userData"));
   console.log("user", user);
   const [formData, setFormData] = useState({
+    googleId: user.googleId,
     email: user.email,
     firstname: user.firstname,
     lastname: user.lastname,
@@ -27,8 +28,9 @@ const Profile = () => {
     e.preventDefault();
 
     // Perform form submission logic
+    console.log(user._id, "id   ");
+
     try {
-      // console.log(formData, "");
       const response = await fetch(
         // `https://taskmanagementbackend-aen8.onrender.com/api/v1/update-user/${user._id}`,
         `http://localhost:4000/api/v1/update-user/${user._id}`,
@@ -46,10 +48,10 @@ const Profile = () => {
         toast.success("Profile updated successfully");
       } else {
         const error = await response.text();
-        toast.error(error || "Failed to update profile");
+        // toast.error(error || "Failed to update profile");
       }
     } catch (err) {
-      toast.error(err.message || "Failed to update profile");
+      // toast.error(err.message || "Failed to update profile");
     }
   };
 

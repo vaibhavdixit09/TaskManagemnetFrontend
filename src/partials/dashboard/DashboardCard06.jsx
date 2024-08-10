@@ -13,7 +13,7 @@ function DashboardCard06() {
     try {
       const user = JSON.parse(localStorage.getItem("userData"));
       if (!user || !user._id) {
-        toast.error("User data not found");
+        // toast.error("User data not found");
         return;
       }
 
