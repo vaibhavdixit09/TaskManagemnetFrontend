@@ -1,80 +1,79 @@
-# Free Tailwind dashboard template
+**TaskMaster Pro**
 
-![Mosaic TailwindCSS template preview](https://github.com/cruip/tailwind-dashboard-template/assets/2683512/ef306423-3b89-4d0c-be80-9c5c682478d1)
+TaskMaster Pro is an advanced task management system designed to help users manage both their office and personal tasks seamlessly. 
+This project is built using the MERN stack (MongoDB, Express.js, React, Node.js) and features Google OAuth authentication for secure and streamlined access.
 
-**Mosaic Lite** is a responsive dashboard template built on top of TailwindCSS and fully coded in React. It comes with several pre-coded charts (built with Chart.js 3) and widgets, and it's a great starting for anyone who wants to create a user interface for SaaS products, administrator dashboards, modern web apps, and more.
+**Features :**
+    Google Authentication: Secure login with Google OAuth using Passport.js.
+    Task Management: Manage office and personal tasks with ease.
+    Task Categorization: Categorize tasks by type (office or personal).
+    Due Dates: Set and track task deadlines.
+    Automated Reminders: Receive automated task reminders via cron jobs.
+    User Sessions: Maintain user sessions securely with express-session.
+    Responsive Design: User-friendly and responsive interface built with React.
+    Technologies Used
+    Frontend: React.js
+    Backend: Node.js, Express.js
+    Database: MongoDB
+    Authentication: Passport.js (Google OAuth)
+    Session Management: express-session
+    Task Scheduling: cron
+    
+**Getting Started :**
+    Prerequisites
+    Make sure you have the following installed on your system:
+    Node.js (v14.x or later)
+    MongoDB (local or cloud)
+    npm (Node package manager)
+    Google Developer Account (for OAuth setup)
 
-Use it for whatever you want, and be sure to reach us out on [Twitter](https://twitter.com/Cruip_com) if you build anything cool/useful with it.
 
-Created and maintained with ❤️ by [Cruip.com](https://cruip.com/).
+**API Endpoints**
 
-## Live demo
+    **Authentication**
+          POST /api/v1/auth/google: Start Google OAuth authentication.
+    **Tasks**
+          GET /api/v1/tasks: Get all tasks for the logged-in user.
+          POST /api/v1/tasks: Create a new task.
+          PUT /api/v1/tasks/:id: Update an existing task.
+          DELETE /api/v1/tasks/:id: Delete a task.
 
-Check the live demo here 👉️ [https://mosaic.cruip.com/](https://mosaic.cruip.com/)
 
-## Mosaic Pro
+**Installation**
+         Clone the Repository:
+         Clone the repository using Git and navigate into the project directory:
+         git clone https://github.com/yourusername/taskmaster-pro.git
+         cd taskmaster-pro
+         
+**Backend Setup:**
+**Navigate to the backend directory:**
 
-[![Mosaic Tailwind Admin Template](https://github.com/cruip/tailwind-dashboard-template/assets/2683512/2b4d0fae-bb07-4229-8a8a-48005f2f33cb)](https://cruip.com/mosaic/)
+         cd backend
+         Install the necessary packages:
+         
+         Run npm install to install all dependencies.
+         Create a .env file in the backend directory and configure the following environment variables:
+         
+         PORT=5000
+         MONGODB_URI=your_mongodb_uri
+         GOOGLE_CLIENT_ID=your_google_client_id
+         GOOGLE_CLIENT_SECRET=your_google_client_secret
+         SESSION_SECRET=your_session_secret
+         Start the backend server:
+         
+         Run npm start to start the backend server.
+         
+**Frontend Setup:**
+**Navigate to the frontend directory:**
 
-## Design files
+          cd ../frontend
+          Install the necessary packages:
 
-If you need the design files, you can download them from Figma's Community 👉 https://bit.ly/3sigqHe
-
-## Table of contents
-
-* [Usage](#usage)
-  * [Project setup](#project-setup)
-  * [Compiles and hot-reloads for development](#compiles-and-hot-reloads-for-development)
-  * [Compiles and minifies for production](#compiles-and-minifies-for-production)
-  * [Customize configuration](#customize-configuration)
-* [Support notes](#support-notes)            
-* [Credits](#credits)
-* [Terms and License](#terms-and-license)
-* [About Us](#about-us)
-* [Stay in the loop](#stay-in-the-loop)
-
-## Usage
-
-This project was bootstrapped with [Vite](https://vitejs.dev/).
-
-### Project setup
-```
-npm install
-```
-
-#### Compiles and hot-reloads for development
-```
-npm run dev
-```
-
-#### Compiles and minifies for production
-```
-npm run build
-```
-
-#### Customize configuration
-See [Configuration Reference](https://vitejs.dev/guide/).
-
-### Support notes
-We are shipping our templates with a very basic React configuration to let you quickly get into the development process, but we don't discourage you from using any other configuration or framework built on the top of React. So, please note that any request dealing with React (e.g. extra features, customisations, et cetera) is to be considered out of the support scope.
-
-For more information about what support covers, please see our (FAQs)[https://cruip.com/faq/].
-
-## Credits
-
-- [Nucleo](https://nucleoapp.com/)
-
-## Terms and License
-
-- Released under the [GPL](https://www.gnu.org/licenses/gpl-3.0.html).
-- Copyright 2020 [Cruip](https://cruip.com/).
-- Use it for personal and commercial projects, but please don’t republish, redistribute, or resell the template.
-- Attribution is not required, although it is really appreciated.
-
-## About Us
-
-We're an Italian developer/designer duo creating high-quality design/code resources for developers, makers, and startups.
-
-## Stay in the loop
-
-If you would like to know when we release new resources, you can follow us on [Twitter](https://twitter.com/Cruip_com), or you can subscribe to our monthly [newsletter](https://cruip.com/#subscribe).
+          Run npm install to install all dependencies.
+          Create a .env file in the frontend directory and add the following:
+          
+          REACT_APP_API_URL=http://localhost:5000/api/v1
+          REACT_APP_GOOGLE_CLIENT_ID=your_google_client_id
+          Start the React development server:
+          
+          Run npm start to start the frontend server.
