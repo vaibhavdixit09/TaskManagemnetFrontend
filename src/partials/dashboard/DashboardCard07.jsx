@@ -8,7 +8,8 @@ function DashboardCard07() {
     const fetchTasks = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/v1/list-task/${user._id}`
+          // `http://localhost:4000/api/v1/list-task/${user._id}`
+          `http://116.202.210.102:9090/api/v1/list-task/${user._id}`
         );
         const data = await response.json();
         console.log(data.allTasks, "data");

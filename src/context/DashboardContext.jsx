@@ -24,8 +24,8 @@ export const DashboardProvider = ({ children }) => {
 
     try {
       const userResponse = await fetch(
-        // "https://taskmanagementbackend-aen8.onrender.com/api/v1/user-details",
-        "http://localhost:4000/api/v1/user-details",
+        "http://116.202.210.102:9090/api/v1/user-details",
+        // "http://localhost:4000/api/v1/user-details",
         {
           method: "GET",
           headers: {

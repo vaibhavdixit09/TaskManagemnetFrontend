@@ -32,8 +32,8 @@ const AddTask = () => {
 
       // Send a POST request to create a new task using Fetch API
       const response = await fetch(
-        // "https://taskmanagementbackend-aen8.onrender.com/api/v1/create-task",
-        "http://localhost:4000/api/v1/create-task",
+        "http://116.202.210.102:9090/api/v1/create-task",
+        // "http://localhost:4000/api/v1/create-task",
         {
           method: "POST",
           headers: {

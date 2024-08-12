@@ -48,8 +48,8 @@ const SignUp = () => {
 
     try {
       const response = await fetch(
-        // "https://taskmanagementbackend-aen8.onrender.com/api/v1/signup",
-        "http://localhost:4000/api/v1/signup",
+        "http://116.202.210.102:9090/api/v1/signup",
+        // "http://localhost:4000/api/v1/signup",
         {
           method: "POST",
           headers: {

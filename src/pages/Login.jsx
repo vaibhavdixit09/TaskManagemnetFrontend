@@ -40,8 +40,8 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        // "https://taskmanagementbackend-aen8.onrender.com/api/v1/login",
-        "http://localhost:4000/api/v1/login",
+        "http://116.202.210.102:9090/api/v1/login",
+        // "http://localhost:4000/api/v1/login",
         {
           method: "POST",
           headers: {
@@ -57,8 +57,8 @@ const Login = () => {
 
         // Fetch user data
         const userResponse = await fetch(
-          // "https://taskmanagementbackend-aen8.onrender.com/api/v1/user-details",
-          "http://localhost:4000/api/v1/user-details",
+          "http://116.202.210.102:9090/api/v1/user-details",
+          // "http://localhost:4000/api/v1/user-details",
           {
             method: "GET",
             headers: {

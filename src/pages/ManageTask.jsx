@@ -60,8 +60,8 @@ const ManageTask = () => {
     try {
       console.log("update function started", updatedTask);
       const response = await fetch(
-        // `https://taskmanagementbackend-aen8.onrender.com/api/v1/update-task/${_id}`,
-        `http://localhost:4000/api/v1/update-task/${_id}`,
+        `http://116.202.210.102:9090/api/v1/update-task/${_id}`,
+        // `http://localhost:4000/api/v1/update-task/${_id}`,
         {
           method: "PUT",
           headers: {
@@ -95,8 +95,8 @@ const ManageTask = () => {
     try {
       const user = JSON.parse(localStorage.getItem("userData"));
       const response = await fetch(
-        // `https://taskmanagementbackend-aen8.onrender.com/api/v1/list-task/${user._id}`
-        `http://localhost:4000/api/v1/list-task/${user._id}`
+        `http://116.202.210.102:9090/api/v1/list-task/${user._id}`
+        // `http://localhost:4000/api/v1/list-task/${user._id}`
       );
       const data = await response.json();
       setAllTasks(data.allTasks);
@@ -122,8 +122,8 @@ const ManageTask = () => {
       try {
         // Call the delete API
         const response = await fetch(
-          // `https://taskmanagementbackend-aen8.onrender.com/api/v1/delete-task/${taskId}`,
-          `http://localhost:4000/api/v1/delete-task/${taskId}`,
+          `http://116.202.210.102:9090/api/v1/delete-task/${taskId}`,
+          // `http://localhost:4000/api/v1/delete-task/${taskId}`,
           {
             method: "DELETE",
             headers: {

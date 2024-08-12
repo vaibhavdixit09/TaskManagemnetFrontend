@@ -32,8 +32,8 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        // `https://taskmanagementbackend-aen8.onrender.com/api/v1/update-user/${user._id}`,
-        `http://localhost:4000/api/v1/update-user/${user._id}`,
+        `http://116.202.210.102:9090/api/v1/update-user/${user._id}`,
+        // `http://localhost:4000/api/v1/update-user/${user._id}`,
         {
           method: "PUT",
           headers: {
